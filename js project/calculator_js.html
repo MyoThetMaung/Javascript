@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center text-success m-2">Calculator</h1>
+        <div class="col-md-4 mx-auto">
+            <div class="card mt-4">
+                <div class="card-body">
+                        <div class="form-group">
+                            <label for="" class="mt-3">First Number</label>
+                            <input type="text" class="form-control" id="firstNumber" placeholder="enter first number">
+                            <small class="text-danger" id="firstErr">first number is required</small>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="" class="mt-3">Second Number</label>
+                            <input type="text" class="form-control" id="secondNumber" placeholder="enter second number">
+                            <small class="text-danger" id="secondErr">second number is required</small>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="" class="mt-3">Select Operator </label>
+                            <select class="form-control" id="operator">
+                                <option value="empty">Choose one</option>
+                                <option value="Add">+</option>
+                                <option value="Subtract">-</option>
+                                <option value="Multiply">*</option>
+                                <option value="Divide">/</option>
+                            </select>
+                            <small class="text-danger" id="operatorErr">operator is required</small>
+                        </div>
+                    
+                    <div class="mt-3">
+                        <button class="btn btn-success " type="button" onclick="calculate()">Calculate</button>
+                        <button class="btn btn-danger" type="button" onclick="clearForm()">Clear</button>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <label for="" class="">Result</label>
+                    <h2 id="output"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let firstNum = document.getElementById('firstNumber');
+        let secondNum = document.getElementById('secondNumber');
+        let operator = document.getElementById('operator');
+        let output = document.getElementById('output');
+
+        let firstErr = document.getElementById('firstErr');
+        let secondErr = document.getElementById('secondErr');
+        let operatorErr = document.getElementById('operatorErr');
+
+        firstErr.style.display = "none";
+        secondErr.style.display = "none";
+        operatorErr.style.display = "none";
+
+        function calculate(){
+            let firstNum = document.getElementById('firstNumber').value;
+            let secondNum = document.getElementById('secondNumber').value;
+            let operator = document.getElementById('operator').value;
+            let result;
+            let status = false;
+
+            if(firstNum == '' || firstNum == null){
+                firstErr.style.display = 'block';
+                status = true;
+            }else{
+                firstErr.style.display = 'none';
+                status = false; 
+            }
+
+            if(secondNum == '' || secondNum == null){
+                secondErr.style.display = 'block';
+                status= true;
+            }else{
+                secondErr.style.display = 'none';
+                status = false;
+            }
+
+            if(operator == 'empty'){
+                operatorErr.style.display = 'block';
+                status = true;
+            }else{
+                operatorErr.style.display = 'none';
+                status =false;
+            }
+            
+           if(status == false){
+               num1 = parseInt(firstNum);
+               num2 = parseInt(secondNum);
+                switch(operator){
+                    case 'Add':
+                        result = num1 + num2;
+                        break;
+                    case 'Subtract':
+                        result = num1 - num2;
+                        break;
+                    case 'Multiply':
+                        result = num1 * num2;
+                        break;
+                    case 'Divide':
+                        result = num1 / num2;
+                        break;
+                }
+                output.innerHTML = result;
+           }
+        }
+
+        function clearForm(){
+            firstNum.value ="";
+            secondNum.value ="";
+            operator.options[0].selected =true;
+            output.innerHTML = '';
+
+            firstErr.style.display = 'none';
+            secondErr.style.display = 'none';
+            operatorErr.style.display = 'none';
+        }
+
+        
+    </script>
+</body>
+</html>
